@@ -110,7 +110,7 @@ $result = mysqli_query($connection, "SELECT * FROM playerStats");
 
 while($query_data = mysqli_fetch_row($result)) {
   echo "<tr>";
-  echo "<td>",$query_data[0], "</td>",
+  echo "<td>",trim($query_data[0]), "</td>",
        "<td>",$query_data[1], "</td>",
        "<td>",$query_data[2], "</td>";
   echo "</tr>";
