@@ -1,5 +1,3 @@
-<?php include "../../../inc/dbinfo.inc"; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,68 +61,27 @@
 </html>
 
 
-<?php
-  /* Connect to MySQL and select the database. */
-  $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
-
-  if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
-
-  $database = mysqli_select_db($connection, DB_DATABASE);
-
-?>
-
-<!-- Input form -->
-<!--<form action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
-  <table border="0">
-    <tr>
-      <td>Name</td>
-      <td>Address</td>
-    </tr>
-    <tr>
-      <td>
-        <input type="text" name="Name" maxlength="45" size="30" />
-      </td>
-      <td>
-        <input type="text" name="Address" maxlength="90" size="60" />
-      </td>
-      <td>
-        <input type="submit" value="Add Data" />
-      </td>
-    </tr>
-  </table>
-</form>-->
-
-<!-- Display table data. -->
-<table border="1" cellpadding="2" cellspacing="2">
-  <tr>
-    <td>Name</td>
-    <td>Team</td>
-    <td>GP</td>
-  </tr>
 
 <?php
-// user input
-$searchQuery = $_GET["searchQuery"];
 
-$result = mysqli_query($connection, "SELECT * FROM playerStats"); 
+mysql_connect('localhost', 'username', 'password') or die('Could not connect: ' . mysql_error());
 
-while($query_data = mysqli_fetch_row($result)) {
-  echo "<tr>";
-  echo "<td>",trim($query_data[0]), "</td>",
-       "<td>",$query_data[1], "</td>",
-       "<td>",$query_data[2], "</td>";
-  echo "</tr>";
+$username='luis';
+$password='theischoolismyschool';
+
+try {
+    $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+     
+    $stmt = $conn->prepare('SELECT * FROM playerStats');
+ 
+    while($row = $stmt->fetch()) {
+        print_r($row);
+        echo row;
+    }
+} catch(PDOException $e) {
+    echo 'ERROR: ' . $e->getMessage();
 }
-?>
-
-</table>
-
-<!-- Clean up. -->
-<?php
-
-  mysqli_free_result($result);
-  mysqli_close($connection);
-
 ?>
 
 </body>
