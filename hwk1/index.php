@@ -70,7 +70,6 @@ $password='theischoolismyschool';
 echo '$username: ' . $username;
 
 try {
-    echo 'About to create pdo\n';
     $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
      
@@ -80,9 +79,9 @@ try {
  
     echo 'Entering while loop\n';
     while($row = $stmt->fetch()) {
-        print_r($row);
+        // print_r($row);
         echo $row;
-        var_dump($row);
+        // var_dump($row);
     }
     echo 'Finished while loop\n';
 } catch(PDOException $e) {
