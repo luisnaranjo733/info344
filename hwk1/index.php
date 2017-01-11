@@ -64,8 +64,6 @@
 
 <?php
 
-mysql_connect('localhost', 'username', 'password') or die('Could not connect: ' . mysql_error());
-
 $username='luis';
 $password='theischoolismyschool';
 
