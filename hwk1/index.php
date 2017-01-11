@@ -80,7 +80,7 @@ try {
     echo 'Entering while loop';
     while($row = $stmt->fetch()) {
         print_r($row);
-        echo row;
+        echo $row;
     }
     echo 'Finished while loop';
 } catch(PDOException $e) {
