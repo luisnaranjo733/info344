@@ -70,19 +70,21 @@ $password='theischoolismyschool';
 echo '$username: ' . $username;
 
 try {
-    echo 'About to create pdo';
+    echo 'About to create pdo\n';
     $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
      
-    echo 'About to prepare query';
+    echo 'About to prepare query\n';
     $stmt = $conn->prepare('SELECT * FROM playerStats');
+    $stmt->execute(array('TEAM' => 'GS'));
  
-    echo 'Entering while loop';
+    echo 'Entering while loop\n';
     while($row = $stmt->fetch()) {
         print_r($row);
         echo $row;
+        var_dump($row);
     }
-    echo 'Finished while loop';
+    echo 'Finished while loop\n';
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
 }
