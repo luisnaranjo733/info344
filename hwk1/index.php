@@ -67,16 +67,22 @@
 $username='luis';
 $password='theischoolismyschool';
 
+echo '$username: ' . $username;
+
 try {
+    echo 'About to create pdo';
     $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
      
+    echo 'About to prepare query';
     $stmt = $conn->prepare('SELECT * FROM playerStats');
  
+    echo 'Entering while loop';
     while($row = $stmt->fetch()) {
         print_r($row);
         echo row;
     }
+    echo 'Finished while loop';
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
 }
