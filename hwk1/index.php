@@ -79,9 +79,10 @@ try {
  
     echo 'Entering while loop\n';
     while($row = $stmt->fetch()) {
-        // print_r($row);
+        print_r($row);
+        echo PHP_EOL;
         // echo $row;
-        var_dump($row);
+        // var_dump($row);
     }
     echo 'Finished while loop\n';
 } catch(PDOException $e) {
