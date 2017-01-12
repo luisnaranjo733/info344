@@ -67,24 +67,28 @@
 $username='luis';
 $password='theischoolismyschool';
 
-echo '$username: ' . $username;
 
 try {
+
+    #$searchQuery = '%' . $_GET['searchQuery']  '%';
+    $searchQuery = '%' . $_GET['searchQuery'] . '%';
+    echo $searchQuery . '<br/>';
+
     $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
      
-    echo 'About to prepare query\n';
-    $stmt = $conn->prepare('SELECT * FROM playerStats');
-    $stmt->execute(array('TEAM' => 'GS'));
+    $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` like :name');
+    $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
+    $stmt->execute();
  
-    echo 'Entering while loop\n';
     while($row = $stmt->fetch()) {
-        print_r($row);
-        echo PHP_EOL;
+        echo '<pre>';
+	print_r($row);
+	echo '</pre>';
+        echo '<br/><br/>';
         // echo $row;
         // var_dump($row);
     }
-    echo 'Finished while loop\n';
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
 }
