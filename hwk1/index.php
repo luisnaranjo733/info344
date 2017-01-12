@@ -1,5 +1,8 @@
 <?php
-
+/*
+This PHP block goes at the top of the document because it's purpose is only to fetch the data from RDS.
+It has nothing to do with the business logic so it should be separated from the business logic below.
+*/
 require_once('Player.php');
 
 $username='luis';
@@ -14,8 +17,7 @@ try {
      
     $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` like :name');
     $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
-    $stmt->execute();
-    // load data
+    $stmt->execute(); // execute SQL query
 
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
