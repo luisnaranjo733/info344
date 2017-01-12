@@ -81,14 +81,13 @@ try {
     $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
     $stmt->execute();
  
-    while($row = $stmt->fetch()) {
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo '<pre>';
 	print_r($row);
 	echo '</pre>';
         echo '<br/><br/>';
-        // echo $row;
-        // var_dump($row);
     }
+
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
 }
