@@ -1,3 +1,27 @@
+<?php
+
+require_once('Player.php');
+
+$username='luis';
+$password='theischoolismyschool';
+
+
+try {
+    $searchQuery = '%' . $_GET['searchQuery'] . '%';
+
+    $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+     
+    $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` like :name');
+    $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
+    $stmt->execute();
+    // load data
+
+} catch(PDOException $e) {
+    echo 'ERROR: ' . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +62,7 @@
     <form>
       <div class="form-group">
         <label for="searchQuery">Email address</label>
-        <input name="searchQuery" type="text" class="form-control" id="searchQuery" placeholder="Steph Curry">
+        <input name="searchQuery" type="text" class="form-control" id="searchQuery" placeholder="Player name">
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -46,22 +70,8 @@
 
 <?php
 
-require_once('Player.php');
-
-$username='luis';
-$password='theischoolismyschool';
-
-
 try {
-    $searchQuery = '%' . $_GET['searchQuery'] . '%';
 
-    $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-     
-    $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` like :name');
-    $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
-    $stmt->execute();
- 
     echo '<div class="list-group">';
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $player = new Player(
