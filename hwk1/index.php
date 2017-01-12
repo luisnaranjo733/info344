@@ -61,7 +61,6 @@
 </html>
 
 
-
 <?php
 
 $username='luis';
@@ -72,7 +71,6 @@ try {
 
     #$searchQuery = '%' . $_GET['searchQuery']  '%';
     $searchQuery = '%' . $_GET['searchQuery'] . '%';
-    echo $searchQuery . '<br/>';
 
     $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
@@ -87,7 +85,7 @@ try {
         echo '<a href="#" class="list-group-item">';
         echo '<h4 class="list-group-item-heading">' . $row['Name'] . '</h4>';
         echo '<p class="list-group-item-text">Team: ' . $row['Team'] . '</p>';
-        echo '<p class="list-group-item-text">3 pt percentage: ' . $row['PPG'] . '</p>';
+        echo '<p class="list-group-item-text">PPG: ' . $row['PPG'] . '</p>';
         echo '<p class="list-group-item-text">3 pt percentage: ' . $row['3PTPct'] . '</p>';
         echo '</a>';
         
