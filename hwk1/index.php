@@ -63,6 +63,8 @@
 
 <?php
 
+require_once('Player.php');
+
 $username='luis';
 $password='theischoolismyschool';
 
@@ -81,7 +83,10 @@ try {
  
     echo '<div class="list-group">';
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      
+        $player = new Player(
+          $row['Name'], $row['Team'], $row['GP'], $row['FTPct'], $row['PPG'], $row['3PTPct']
+        );
+        Player::printPlayer($player);
         echo '<a href="#" class="list-group-item">';
         echo '<h4 class="list-group-item-heading">' . $row['Name'] . '</h4>';
         echo '<p class="list-group-item-text">Team: ' . $row['Team'] . '</p>';
