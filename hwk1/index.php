@@ -44,23 +44,6 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-  </div>
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-
-  <script src="./parallax.js-1.4.2/parallax.js"></script>
-
-</body>
-
-</html>
-
-
 <?php
 
 require_once('Player.php');
@@ -70,8 +53,6 @@ $password='theischoolismyschool';
 
 
 try {
-
-    #$searchQuery = '%' . $_GET['searchQuery']  '%';
     $searchQuery = '%' . $_GET['searchQuery'] . '%';
 
     $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
@@ -102,6 +83,20 @@ try {
 }
 ?>
 
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <script src="./parallax.js-1.4.2/parallax.js"></script>
+
 </body>
+
 </html>
+
 
