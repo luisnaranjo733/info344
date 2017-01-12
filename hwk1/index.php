@@ -79,12 +79,14 @@ try {
         $player = new Player(
           $row['Name'], $row['Team'], $row['GP'], $row['FTPct'], $row['PPG'], $row['3PTPct']
         );
-        Player::printPlayer($player);
+
         echo '<a href="#" class="list-group-item">';
-        echo '<h4 class="list-group-item-heading">' . $row['Name'] . '</h4>';
-        echo '<p class="list-group-item-text">Team: ' . $row['Team'] . '</p>';
-        echo '<p class="list-group-item-text">PPG: ' . $row['PPG'] . '</p>';
-        echo '<p class="list-group-item-text">3 pt percentage: ' . $row['3PTPct'] . '</p>';
+        echo '<h4 class="list-group-item-heading">' . $player->getName() . '</h4>';
+        echo '<p class="list-group-item-text">Team: ' . $player->getTeam() . '</p>';
+        echo '<p class="list-group-item-text">Team: ' . $player->getGamesPlayed() . '</p>';
+        echo '<p class="list-group-item-text">Team: ' . $player->getFreeThrowPct() . '</p>';
+        echo '<p class="list-group-item-text">PPG: ' . $player->getPointsPerGame() . '</p>';
+        echo '<p class="list-group-item-text">3 pt percentage: ' . $player->getThreePointPct() . '</p>';
         echo '</a>';
         
     }
