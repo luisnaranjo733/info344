@@ -81,12 +81,22 @@ try {
     $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
     $stmt->execute();
  
+    echo '<div class="list-group">';
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo '<pre>';
-	print_r($row);
-	echo '</pre>';
-        echo '<br/><br/>';
+      
+        echo '<a href="#" class="list-group-item active">';
+        echo '<h4 class="list-group-item-heading">' . $row['Name'] . '</h4>';
+        echo '<p class="list-group-item-text">...</p>';
+        echo '</a>';
+      
+
+        // echo '<pre>';
+        // print_r($row);
+        // echo '</pre>';
+        // echo '<br/><br/>';
+        
     }
+    echo '</div>';
 
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
