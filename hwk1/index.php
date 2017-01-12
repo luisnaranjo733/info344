@@ -24,6 +24,8 @@ try {
 }
 ?>
 
+<!-- presentation layer (view) -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +55,7 @@ try {
   
   
 <!--<img src="http://a.espncdn.com/photo/2016/0602/nba_0602nbaplayoffs_1296x518.jpeg" id='header-img'/>-->
-<div class="parallax-window" data-natural-height="518" data-natural-width="1296" data-parallax="scroll" data-image-src="http://a.espncdn.com/photo/2016/0602/nba_0602nbaplayoffs_1296x518.jpeg"></div>
+<div class="parallax-window" data-natural-height="518" data-natural-width="1296" data-parallax="scroll" data-image-src="img/nba_0602nbaplayoffs_1296x518.jpeg"></div>
 <!--1296, 518-->
   <div class="container">
       
@@ -71,6 +73,7 @@ try {
     </form>
 
 <?php
+// business logic (controller)
 
 try {
 
