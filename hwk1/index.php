@@ -84,16 +84,12 @@ try {
     echo '<div class="list-group">';
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       
-        echo '<a href="#" class="list-group-item active">';
+        echo '<a href="#" class="list-group-item">';
         echo '<h4 class="list-group-item-heading">' . $row['Name'] . '</h4>';
-        echo '<p class="list-group-item-text">...</p>';
+        echo '<p class="list-group-item-text">Team: ' . $row['Team'] . '</p>';
+        echo '<p class="list-group-item-text">3 pt percentage: ' . $row['PPG'] . '</p>';
+        echo '<p class="list-group-item-text">3 pt percentage: ' . $row['3PTPct'] . '</p>';
         echo '</a>';
-      
-
-        // echo '<pre>';
-        // print_r($row);
-        // echo '</pre>';
-        // echo '<br/><br/>';
         
     }
     echo '</div>';
