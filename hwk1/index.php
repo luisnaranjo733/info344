@@ -78,13 +78,14 @@ try {
 try {
 
     echo '<div class="list-group">';
+    $resultsFound = false;
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo '$row' . $row;
+	$resultsFound = true;
         $player = new Player(
           $row['Name'], $row['Team'], $row['GP'], $row['FTPct'], $row['PPG'], $row['3PTPct']
         );
 
-        echo '<a href="#" class="list-group-item">';
+        echo '<a class="list-group-item">';
         echo '<h4 class="list-group-item-heading">' . $player->getName() . '</h4>';
         echo '<p class="list-group-item-text">Team: ' . $player->getTeam() . '</p>';
         echo '<p class="list-group-item-text">Team: ' . $player->getGamesPlayed() . '</p>';
@@ -95,6 +96,9 @@ try {
         
     }
     echo '</div>';
+    if (!$resultsFound) {
+	echo '"' . $_GET['searchQuery'] . '" not found' ;
+    }
 
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
