@@ -79,6 +79,7 @@ try {
 
     echo '<div class="list-group">';
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo '$row' . $row;
         $player = new Player(
           $row['Name'], $row['Team'], $row['GP'], $row['FTPct'], $row['PPG'], $row['3PTPct']
         );
