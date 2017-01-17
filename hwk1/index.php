@@ -11,14 +11,19 @@ $password='theischoolismyschool';
 
 try {
     $searchQuery = '%' . $_GET['searchQuery'] . '%';
-    echo 'SEARCH: ' . $searchQuery;
+    $executeQuery =  true;
+    if ($searchQuery !== '%%') { // if query is not empty string
+      $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+      
+      $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` like :name');
+      $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
+      $stmt->execute(); // execute SQL query
+    } else { // if query is empty string, don't run the query
+      $executeQuery = false;
+    }
 
-    $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-     
-    $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` like :name');
-    $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
-    $stmt->execute(); // execute SQL query
+
 
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
@@ -76,37 +81,46 @@ try {
 <?php
 // business logic (controller)
 
-try {
-
-    echo '<div class="list-group">';
-    $resultsFound = false;
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-
-
-        $resultsFound = true;
-        $player = new Player(
-          $row['Name'], $row['Team'], $row['GP'], $row['FTPct'], $row['PPG'], $row['3PTPct']
-        );
-
-        echo '<a class="list-group-item">';
-        echo '<h4 class="list-group-item-heading">' . $player->getName() . '</h4>';
-        echo '<p class="list-group-item-text">Team: ' . $player->getTeam() . '</p>';
-        echo '<p class="list-group-item-text">Team: ' . $player->getGamesPlayed() . '</p>';
-        echo '<p class="list-group-item-text">Team: ' . $player->getFreeThrowPct() . '</p>';
-        echo '<p class="list-group-item-text">PPG: ' . $player->getPointsPerGame() . '</p>';
-        echo '<p class="list-group-item-text">3 pt percentage: ' . $player->getThreePointPct() . '</p>';
-        echo '</a>';
-        
-    }
-    echo '</div>';
-    if (!$resultsFound) {
-	    echo '"' . $_GET['searchQuery'] . '" not found' ;
-    }
-
-} catch(PDOException $e) {
-    echo 'ERROR: ' . $e->getMessage();
+function handleEdgeCase($errorMessage) {
+  echo 'Error: ' . $errorMessage;
 }
+
+if ($executeQuery) { // if query is not empty
+  try {
+      echo '<div class="list-group">';
+      $resultsFound = false;
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+
+
+          $resultsFound = true;
+          $player = new Player(
+            $row['Name'], $row['Team'], $row['GP'], $row['FTPct'], $row['PPG'], $row['3PTPct']
+          );
+
+          echo '<a class="list-group-item">';
+          echo '<h4 class="list-group-item-heading">' . $player->getName() . '</h4>';
+          echo '<p class="list-group-item-text">Team: ' . $player->getTeam() . '</p>';
+          echo '<p class="list-group-item-text">Team: ' . $player->getGamesPlayed() . '</p>';
+          echo '<p class="list-group-item-text">Team: ' . $player->getFreeThrowPct() . '</p>';
+          echo '<p class="list-group-item-text">PPG: ' . $player->getPointsPerGame() . '</p>';
+          echo '<p class="list-group-item-text">3 pt percentage: ' . $player->getThreePointPct() . '</p>';
+          echo '</a>';
+          
+      }
+      echo '</div>';
+      if (!$resultsFound) {
+        handleEdgeCase('"' . $_GET['searchQuery'] . '" not found');
+      }
+
+  } catch(PDOException $e) {
+      handleEdgeCase('ERROR: ' . $e->getMessage())
+  }
+} else { // query is empty string
+  handleEdgeCase('Empty query!');
+}
+
+
 ?>
 
   </div>
