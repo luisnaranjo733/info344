@@ -114,7 +114,7 @@ if ($executeQuery) { // if query is not empty
       }
 
   } catch(PDOException $e) {
-      handleEdgeCase('ERROR: ' . $e->getMessage())
+      handleEdgeCase('ERROR: ' . $e->getMessage());
   }
 } else { // query is empty string
   handleEdgeCase('Empty query!');
