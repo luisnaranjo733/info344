@@ -11,6 +11,7 @@ $password='theischoolismyschool';
 
 try {
     $searchQuery = '%' . $_GET['searchQuery'] . '%';
+    echo 'SEARCH: ' . $searchQuery;
 
     $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
@@ -80,7 +81,10 @@ try {
     echo '<div class="list-group">';
     $resultsFound = false;
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-	$resultsFound = true;
+
+
+
+        $resultsFound = true;
         $player = new Player(
           $row['Name'], $row['Team'], $row['GP'], $row['FTPct'], $row['PPG'], $row['3PTPct']
         );
@@ -97,7 +101,7 @@ try {
     }
     echo '</div>';
     if (!$resultsFound) {
-	echo '"' . $_GET['searchQuery'] . '" not found' ;
+	    echo '"' . $_GET['searchQuery'] . '" not found' ;
     }
 
 } catch(PDOException $e) {
