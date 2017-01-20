@@ -1,0 +1,13 @@
+.form-group {
+    margin-bottom: 1em;
+}
+
+#searchResults {
+    width: 100%;
+    height: 200px;
+    color: red;
+    border: 1px solid grey;
+
+    margin-top: 0px;
+    display: none;
+}
