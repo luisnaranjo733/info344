@@ -1,13 +1,15 @@
 .form-group {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
-#searchResults {
+#searchSuggestions {
     width: 100%;
     height: 200px;
-    color: red;
     border: 1px solid grey;
-
-    margin-top: 0px;
     display: none;
+}
+
+#searchSuggestions > ul {
+    list-style-type: none;
+    padding-left: 12px;
 }
