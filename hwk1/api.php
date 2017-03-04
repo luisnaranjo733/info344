@@ -13,13 +13,13 @@ if (!isset($_GET['searchQuery'])) {
 }
 
 try {
-    $searchQuery = '%' . $_GET['searchQuery'] . '%';
+    $searchQuery = $_GET['searchQuery'];
     $executeQuery = $searchQuery !== '%%';
     if ($executeQuery) { // if query is not empty string
       $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
       
-      $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` like :name');
+      $stmt = $conn->prepare('SELECT * FROM playerStats WHERE `Name` LIKE :name LIMIT 1');
       $stmt->bindParam(':name', $searchQuery, PDO::PARAM_STR);
       $stmt->execute(); // execute SQL query
     }

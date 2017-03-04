@@ -10,8 +10,7 @@ $password='theischoolismyschool';
 
 
 try {
-    // $searchQuery = '%' . $_GET['searchQuery'] . '%';
-    $searchQuery = $_GET['searchQuery'];
+    $searchQuery = '%' . $_GET['searchQuery'] . '%';
     $executeQuery =  true;
     if ($searchQuery !== '%%') { // if query is not empty string
       $conn = new PDO('mysql:host=tutorial-db-instance.cejtkzfmojjc.us-west-2.rds.amazonaws.com:3306;dbname=nba', $username, $password);
