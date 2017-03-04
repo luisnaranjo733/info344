@@ -39,6 +39,7 @@ function handleEdgeCase($errorMessage) {
 
 if ($executeQuery) { // if query is not empty
   try {
+      header('Content-Type: application/json');
       $players = array();
       while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           $resultsFound = true;
