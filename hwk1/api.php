@@ -39,7 +39,7 @@ function handleEdgeCase($errorMessage) {
 
 if ($executeQuery) { // if query is not empty
   try {
-      header('Content-Type: application/json');
+      header('content-type: application/json; charset=utf-8');
       $players = array();
       while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           $resultsFound = true;
@@ -52,7 +52,13 @@ if ($executeQuery) { // if query is not empty
       if (count($players) == 0) {
         handleEdgeCase('"' . $_GET['searchQuery'] . '" not found');
       } else {
-          echo json_encode($players, JSON_PRETTY_PRINT);
+        if(isset($_GET['callback']))
+        {
+            echo $_GET['callback'] . '('.json_encode($data, JSON_PRETTY_PRINT).')';
+        } else {
+            echo json_encode($data, JSON_PRETTY_PRINT);
+        }
+          
       }
 
   } catch(PDOException $e) {
