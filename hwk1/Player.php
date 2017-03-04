@@ -5,7 +5,6 @@ class Player {
     public $gamesPlayed;
     public $freeThrowPct;
     public $pointsPerGame;
-    public $threePtPct;
     
     public function __construct($name, $team, $gamesPlayed, $freeThrowPct, $pointsPerGame, $threePointPct) {
         $this->name = $name;
