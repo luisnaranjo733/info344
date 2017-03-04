@@ -52,14 +52,11 @@ if ($executeQuery) { // if query is not empty
       if (count($players) == 0) {
         handleEdgeCase('"' . $_GET['searchQuery'] . '" not found');
       } else {
-          echo "alive";
         if(isset($_GET['callback']))
         {
-            echo "alive2";
-            echo $_GET['callback'] . '('.json_encode($data, JSON_PRETTY_PRINT).')';
+            echo $_GET['callback'] . '('.json_encode($players, JSON_PRETTY_PRINT).')';
         } else {
-            echo "alive3";
-            echo json_encode($data, JSON_PRETTY_PRINT);
+            echo json_encode($players, JSON_PRETTY_PRINT);
         }
           
       }
