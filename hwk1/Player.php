@@ -1,11 +1,11 @@
 <?php 
 class Player { 
-    private $name;
-    private $team; 
-    private $gamesPlayed;
-    private $freeThrowPct;
-    private $pointsPerGame;
-    private $threePtPct;
+    public $name;
+    public $team; 
+    public $gamesPlayed;
+    public $freeThrowPct;
+    public $pointsPerGame;
+    public $threePtPct;
     
     public function __construct($name, $team, $gamesPlayed, $freeThrowPct, $pointsPerGame, $threePointPct) {
         $this->name = $name;
