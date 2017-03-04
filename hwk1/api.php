@@ -30,7 +30,6 @@ try {
 }
 ?>
 
-
 <?php
 // business logic (controller)
 
@@ -52,7 +51,7 @@ if ($executeQuery) { // if query is not empty
       if (count($players) == 0) {
         handleEdgeCase('"' . $_GET['searchQuery'] . '" not found');
       } else {
-          echo json_encode($players);
+          echo json_encode($players, JSON_PRETTY_PRINT);
       }
 
   } catch(PDOException $e) {
