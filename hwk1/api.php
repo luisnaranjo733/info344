@@ -65,6 +65,7 @@ if ($executeQuery) { // if query is not empty
       handleEdgeCase('ERROR: ' . $e->getMessage());
   }
 } else { // query is empty string
+    echo json_econ(array());
   handleEdgeCase('Empty query!');
 }
 
